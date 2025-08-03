@@ -1,16 +1,27 @@
 
 pipeline {
     agent any
+
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git url: 'https://github.com/sreeja-creator-ai/node-js.git', branch: 'main'
             }
         }
-        stage('Deploy') {
+
+        stage('Build Docker Image') {
             steps {
-                sh 'chmod +x deploy.sh'
-                sh './deploy.sh'
+                script {
+                    docker.build('node-app')
+                }
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.image('node-app').run('-p 3000:3000')
+                }
             }
         }
     }
