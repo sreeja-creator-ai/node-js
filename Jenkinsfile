@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/sreeja-creator-ai/node-js.git'
+                git 'https://github.com/sreeja-creator-ai/node-js.git',branch:'main'
             }
         }
         stage('Deploy') {
